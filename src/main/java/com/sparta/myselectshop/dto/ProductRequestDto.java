@@ -1,22 +1,19 @@
 package com.sparta.myselectshop.dto;
 
-import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductRequestDto {
-    @NotBlank
-    private String name;
-    @Email
-    private String email;
-    @Positive(message = "양수만 가능합니다.")
-    private int price;
-    @Negative(message = "음수만 가능합니다.")
-    private int discount;
-    @Size(min=2, max=10)
+    // 관심상품명
+    private String title;
+    // 관심상품 썸네일 image URL
+    private String image;
+    // 관심상품 구매링크 URL
     private String link;
-    @Max(10)
-    private int max;
-    @Min(2)
-    private int min;
+    // 관심상품의 최저가
+    private int lprice;
 }
