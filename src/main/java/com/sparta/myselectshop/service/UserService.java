@@ -24,7 +24,7 @@ public class UserService {
     }
 
     // ADMIN_TOKEN
-    private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
+    private final String ADMIN_TOKEN = System.getenv("ADMIN_TOKEN");
 
     public void signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
