@@ -16,7 +16,16 @@
 <body>
 <div id="login-form">
     <div id="login-title">Log into Select Shop</div>
-    <br>
+    <button id="login-kakao-btn"
+            type="button"
+            th:attr="data-kakao-url=@{https://kauth.kakao.com/oauth/authorize(
+          client_id=${kakaoRestApi},
+          redirect_uri='http://localhost:8080/api/user/kakao/callback',
+          response_type='code'
+        )}"
+            onclick="location.href=this.dataset.kakaoUrl">
+        카카오 로그인
+    </button>
     <button id="login-id-btn" onclick="location.href='/api/user/signup'">
         회원 가입하기
     </button>
