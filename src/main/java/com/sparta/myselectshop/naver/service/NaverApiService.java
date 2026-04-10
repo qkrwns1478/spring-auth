@@ -5,6 +5,7 @@ import com.sparta.myselectshop.naver.dto.ItemDto;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.restclient.RestTemplateBuilder;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,11 @@ public class NaverApiService {
 
     private final RestTemplate restTemplate;
 
-    private final String clientId = System.getenv("NAVER_CLIENT_ID");
-    private final String clientSecret =  System.getenv("NAVER_CLIENT_SECRET");
+    @Value("${app.naver-client-id}")
+    private String naverClientId;
+
+    @Value("${app.naver-client-secret}")
+    private String naverClientSecret;
 
     public NaverApiService(RestTemplateBuilder builder) {
         this.restTemplate = builder.build();
@@ -44,8 +48,8 @@ public class NaverApiService {
         RequestEntity<Void> requestEntity = RequestEntity
                 .get(uri)
                 .headers(headers -> {
-                    headers.add("X-Naver-Client-Id", clientId);
-                    headers.add("X-Naver-Client-Secret", clientSecret);
+                    headers.add("X-Naver-Client-Id", naverClientId);
+                    headers.add("X-Naver-Client-Secret", naverClientSecret);
                 })
                 .build();
 

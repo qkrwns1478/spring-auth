@@ -5,6 +5,8 @@ import com.sparta.myselectshop.entity.User;
 import com.sparta.myselectshop.entity.UserRoleEnum;
 import com.sparta.myselectshop.jwt.JwtUtil;
 import com.sparta.myselectshop.repository.UserRepository;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    @Getter
     private final JwtUtil jwtUtil;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
@@ -24,7 +27,8 @@ public class UserService {
     }
 
     // ADMIN_TOKEN
-    private final String ADMIN_TOKEN = System.getenv("ADMIN_TOKEN");
+    @Value("${app.admin-token}")
+    private String ADMIN_TOKEN;
 
     public void signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
