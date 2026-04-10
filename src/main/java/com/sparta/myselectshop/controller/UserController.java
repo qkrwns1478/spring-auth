@@ -33,6 +33,7 @@ public class UserController {
     private final UserService userService;
     private final FolderService folderService;
     private final KakaoService kakaoService;
+    private final JwtUtil jwtUtil;
 
     @Value("${app.kakao-rest-api}")
     String kakaoRestApi;
@@ -89,9 +90,7 @@ public class UserController {
         // JWT 토큰을 받아 옴
         String token = kakaoService.kakaoLogin(code);
 
-        Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, token);
-        cookie.setPath("/");
-        response.addCookie(cookie);
+        jwtUtil.addJwtToCookie(token, response);
 
         return "redirect:/";
     }
